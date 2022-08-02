@@ -1,0 +1,37 @@
+What is Stored Procedure in myql?
+Stored procedure is prewritten sql codes saved inside database, reused later over and over again.
+
+Why do we need stored Procedure?
+Suppose you have to perform some specific tasks on the database regularly…and each task involves multiple sql codes.. you can group sql codes of these tasks and save it by creating stored procedure in MySQL.
+This way you don’t need to write same sql codes over and over again..
+
+example-
+DELIMITER &&  
+CREATE PROCEDURE  sales_rep()
+BEGIN  
+	 SELECT * FROM sales            
+               WHERE target > 100;  
+	SELECT COUNT(emp_code) 
+                AS Total_Salesrep FROM sales;   
+END &&  
+DELIMITER ;  
+
+
+Sections:
+Procedure name, Parameters list,  sql codes
+
+DELIMITER &&
+CREATE PROCEDURE sales_rep()
+BEGIN  
+	SELECT * FROM sales            
+               WHERE target > 100;  
+	SELECT COUNT(emp_code) 
+                AS Total_Salesrep FROM sales;    
+END &&  
+DELIMITER ; 
+
+*Delimiter are used to tell MySQL to mark start and end of entire statement..
+*You can use delimiter as && or // or $$
+
+To call a procedure:
+CALL sales_rep();

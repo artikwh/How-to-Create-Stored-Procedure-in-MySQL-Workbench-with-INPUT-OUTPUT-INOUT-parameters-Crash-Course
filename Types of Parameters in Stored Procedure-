@@ -1,0 +1,71 @@
+IN parameter- 
+it takes a parameter as input variable to sql codes.
+
+OUT parameter-
+it takes a parameter as output variable to sql codes.
+
+ INOUT parameter- 
+ it takes a common parameter for input and output both.
+ 
+How to create stored procedure using IN parameter-
+(IN/OUT/INOUT para_name  datatype)
+
+DELIMITER // 
+CREATE PROCEDURE  GetStudentData( IN stu_id  INT) 
+BEGIN 
+ 	SELECT * FROM student 
+	WHERE id = stu_id; 
+END // 
+DELIMITER ;
+
+CALL GetStudentData(102)
+
+CALL GetStudentData()  error(incoorect number of arguments)
+
+How to create stored procedure using OUT parameter-
+
+DELIMITER $$
+CREATE PROCEDURE GetTopperCount (  
+     OUT  totalTopper  INT ) 
+BEGIN 
+	SELECT COUNT(id) INTO totalTopper 
+	FROM student 
+	WHERE grade = ‘A+’; 
+END$$ 
+DELIMITER ;
+
+To execute:
+CALL GetTopperCount(@totalTopper);
+SELECT @totalTopper;
+
+How to create stored procedure using INOUT parameter- 
+DELIMITER // 
+CREATE PROCEDURE  GetStudentID( INOUT name VARCHAR(255)) 
+BEGIN 
+ 	SELECT id INTO name 
+	FROM student 
+	WHERE name = name; 
+END // 
+DELIMITER ;
+
+To execute:
+SET @name = ‘Rohan’;
+CALL GetStudentID(@name);
+SELECT @name;
+
+How to list stored procedure in MySQL workbench-
+1. list all stored procedure in the MySQL..
+SHOW PROCEDURE STATUS;
+2. list all saved procedure in mystudentsb database ..
+SHOW PROCEDURE STATUS WHERE db = 'database1';  
+
+How to delete stored procedure in MySQL workbench-
+1. to delete a procedure in MySQL workbench..
+DROP PROCEDURE  procedure_name; 
+To avoid error message:
+DROP PROCEDURE [ IF EXISTS ] procedure_name;
+
+
+
+
+
